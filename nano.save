@@ -1,0 +1,3 @@
+def none(arg, arg2, none=None, none2=None):
+	print(none)
+none(2, 2, none=213, none=1)

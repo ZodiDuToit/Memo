@@ -1,0 +1,226 @@
+
+WindowManager:
+    MainWindow:
+    EditingWindow:
+    DisplayWindow:
+    AddWindow:
+
+<MainWindow>:
+    name: "main"
+
+    container: container
+
+    FloatLayout:
+        ScrollView:
+            size_hint: 0.3, 1
+
+            GridLayout:
+                id: container
+     
+                size_hint_y: None
+
+                height: self.minimum_height  
+                row_default_height: 60
+                cols:1
+
+        Label:
+            text: "memo of the day"   
+            size_hint: 0.3, 0.75
+            pos_hint: {"x": 0.3, "y": 0.8}
+
+        Label:
+            text: "memo of the month"   
+            size_hint: 0.3, 7.5
+            pos_hint: {"x": 0.6, "y": 0.8}
+
+
+<DisplayWindow>:
+    name: "display"
+
+    title: title
+    content: content
+
+    FloatLayout:
+        GridLayout:
+
+            cols: 2
+
+            size_hint: 1, 0.75
+            pos_hint: {"top": 1}
+
+            spacing: 10
+            padding: 10
+
+            Label:
+                text: "Title"
+                size_hint: 0.1, 0.5
+                
+            Label:
+                id: title
+
+                text: ""
+                background_color: 0.1, 0.2, 0.7, 1
+            
+
+            Label:
+                text: "Memo"
+                size_hint: 0.1, 0.5
+
+            Label:
+                id: content
+
+                text: ""
+                background_color: 1, 1, 0, 0, 1
+
+        Button:
+            text: "edit" 
+            size_hint: 0.2, 0.1
+
+            on_release:
+                app.root.current = "edit"
+                root.manager.transition.direction = "right"
+
+<EditingWindow>:
+    name: "edit"
+
+    title: title
+    content: content
+
+    FloatLayout:
+        GridLayout:
+
+            cols: 2
+
+            Label:
+                text: "Title"
+                
+                size_hint: 0.2, 0.1
+
+            Label:
+                id: title
+
+                text: ""
+
+                size_hint: 0.8, 0.1
+                pos_hint: {"x": 0.1, "y": 0.9}            
+
+            Label:
+                text: "Memo"
+                size_hint: 0.2, 0.1
+
+            TextInput:
+                id: content
+
+                text: ""
+
+                size_hint: (0.8, 0.8)
+                pos_hint: {"x": 0.1, "y": 0.1}
+
+            OpenSaveMemoPopupButton:
+                text: "Done"
+
+                size_hint: (0.2, 0.1)
+                pos_hint: {"x": 0, "y": 0}
+
+                on_release:
+                    self.show_popup()
+                
+<AddWindow>:
+    name: "edit"
+
+    title: title
+    content: content
+
+    FloatLayout:
+        GridLayout:
+
+            cols: 2
+
+            Label:
+                text: "Title"
+                
+                size_hint: 0.2, 0.1
+
+            Label:
+                id: title
+
+                text: ""
+
+                multiline: False
+
+                size_hint: 0.8, 0.1
+                pos_hint: {"x": 0.1, "y": 0.9}            
+
+            Label:
+                text: "Memo"
+                size_hint: 0.2, 0.1
+
+            TextInput:
+                id: content
+
+                text: ""
+
+                size_hint: (0.8, 0.8)
+                pos_hint: {"x": 0.1, "y": 0.1}
+
+
+            OpenSaveMemoPopupButton:
+                text: "Done"
+
+                size_hint: (0.2, 0.1)
+                pos_hint: {"x": 0, "y": 0}
+
+                on_release:
+                    self.show_popup()
+
+            Button:
+                text: "Cancle"  
+                
+                size_hint: (0.2, 0.1)
+                pos_hint: {"x": 0, "y": 0}              
+
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "up"                    
+
+                    content.text = ""
+                    title.text = ""
+
+<saveMemoPopup>:
+
+    size_hint: 0.5, 0.4
+
+    GridLayout:
+        cols: 1
+        orientation: "vertical"
+
+        Label: 
+            text: "Changes has been made"
+
+        GridLayout:
+            cols: 1
+            orientation: "horisontal"
+
+            Button:
+                text: "Save Changes"
+
+                on_release: 
+                    root.saveChanges()
+
+                    app.root.current = "main"
+                    root.close()
+
+            Button:
+                text: "Discard Changes"
+
+                on_release: 
+                    app.root.current = "main"
+                    root.dismiss()
+
+            Button:
+                text: "Cancel"
+
+                on_release: 
+                    root.dismiss()
+
+            
