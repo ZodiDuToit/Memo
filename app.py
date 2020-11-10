@@ -123,6 +123,10 @@ class SaveMemoPopup(Popup):
         database.insert(editingTitle.text, editingContent.text)
 
 
+class ColorLabel(Label):
+    pass
+
+
 kv = Builder.load_file("widgets.kv")
 
 # app

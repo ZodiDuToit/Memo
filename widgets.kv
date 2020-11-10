@@ -5,6 +5,7 @@ WindowManager:
     DisplayWindow:
     AddWindow:
 
+
 <MainWindow>:
     name: "main"
 
@@ -23,15 +24,32 @@ WindowManager:
                 row_default_height: 60
                 cols:1
 
-        Label:
-            text: "memo of the day"   
-            size_hint: 0.3, 0.75
-            pos_hint: {"x": 0.3, "y": 0.8}
+        GridLayout:
+            cols: 1
 
-        Label:
-            text: "memo of the month"   
-            size_hint: 0.3, 0.75
-            pos_hint: {"x": 0.6, "y": 0.8}
+            size_hint: 0.6, 0.75
+            pos_hint: {"x": 0.4, "y": 0.2}
+
+            ScrollView:
+                ColorLabel:
+                    text: "memo of the day"
+
+                    size_hint: 1, 1
+                    text_size: self.size
+                   
+                    color: (0, 1, 1, 1)
+                            
+
+            ScrollView:
+                ColorLabel:
+                    text: "memo of the month"   
+                    size_hint: 1, 1
+
+                    text_size: self.size
+                   
+                    color: (0, 1, 1, 1)
+                    background_color: (1, 0, 1, 1)
+                
 
         Button:
             text: "ADD"
@@ -59,22 +77,22 @@ WindowManager:
             spacing: 10
             padding: 10
 
-            Label:
+            ColorLabel:
                 text: "Title"
                 size_hint: 0.1, 0.5
                 
-            Label:
+            ColorLabel:
                 id: title
 
                 text: ""
                 background_color: 0.1, 0.2, 0.7, 1
             
 
-            Label:
+            ColorLabel:
                 text: "Memo"
                 size_hint: 0.1, 0.5
 
-            Label:
+            ColorLabel:
                 id: content
 
                 text: ""
@@ -98,7 +116,7 @@ WindowManager:
 
             on_release:
                 app.root.current = "main"
-                root.manager.transition.direction = "left"
+                root.manager.transition.direction = "up"
                  
 
 
@@ -113,19 +131,19 @@ WindowManager:
 
             cols: 2
 
-            Label:
+            ColorLabel:
                 text: "Title"
                 
                 size_hint: 0.2, 0.1
 
-            Label:
+            ColorLabel:
                 id: title
 
                 text: ""
 
                 size_hint: 0.8, 0.1          
 
-            Label:
+            ColorLabel:
                 text: "Memo"
                 size_hint: 0.2, 0.1
 
@@ -168,7 +186,7 @@ WindowManager:
             cols: 2
 
 
-            Label:
+            ColorLabel:
                 text: "Title"
                 
                 size_hint: 0.2, 0.1
@@ -183,7 +201,7 @@ WindowManager:
                 size_hint: 0.8, 0.1
                 pos_hint: {"x": 0.1, "y": 0.9}            
 
-            Label:
+            ColorLabel:
                 text: "Memo"
                 size_hint: 0.2, 0.1
 
@@ -220,7 +238,7 @@ WindowManager:
 
                     content.text = ""
                     title.text = ""
-        Label:
+        ColorLabel:
             id: help
 
             text: "the help message"
@@ -237,7 +255,7 @@ WindowManager:
         cols: 1
         orientation: "lr-tb"
 
-        Label: 
+        ColorLabel: 
             text: "Changes has been made"
 
         GridLayout:
@@ -265,5 +283,17 @@ WindowManager:
 
                 on_release: 
                     root.dismiss()
+
+     
+
+
+<ColorLabel>:
+    canvas.before:
+        Color:
+            rgb: 0.30, 0.30, 0.30
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
             
