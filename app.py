@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.clock import Clock
+
 import database
 
 # screen manager
@@ -23,17 +24,16 @@ class MainWindow(Screen):
 
     container = ObjectProperty(None)
 
-    def on_enter(self):
-        Clock.schedule_once(self.addTitleButtons)
-    
+    title = ObjectProperty(None)
+    content = ObjectProperty(None)
 
+    def on_enter(self):
+        Clock.schedule_once(self.displayRandomMemo)
+        
+    
     def changeCurrentScreen(self, screen, direction):
         self.manager.current = screen
         self.manager.transition.direction = direction
-
-    def onMemoButtonRelease(self, instance):
-        self.changeCurrentScreen("add", "up")   
-
 
     def onTitleButtonRelease(self, instance):
         global currectMemosTitle
@@ -41,10 +41,8 @@ class MainWindow(Screen):
         currectMemosTitle = instance.text
         self.changeCurrentScreen("display", "right")
 
-
     def addbutton(self, text, on_release):
         self.container.add_widget(Button(text=text, on_release=on_release))
-
 
     def addTitleButtons(self, instance):
         self.container.clear_widgets()
@@ -52,6 +50,9 @@ class MainWindow(Screen):
         for title in database.retreiveAllTitles():
 
             self.addbutton(title, self.onTitleButtonRelease)  
+        
+    def displayRandomMemo(self, instance):
+        self.title, self.content = database.retreiveRandomMemo()
 
 
 class AddWindow(Screen): 

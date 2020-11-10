@@ -11,6 +11,9 @@ WindowManager:
 
     container: container
 
+    tile: tile
+    content: content
+
     FloatLayout:
         ScrollView:
             size_hint: 0.3, 1
@@ -27,29 +30,36 @@ WindowManager:
         GridLayout:
             cols: 1
 
+            spacing: 0.1
+
             size_hint: 0.6, 0.75
-            pos_hint: {"x": 0.4, "y": 0.2}
+            pos_hint: {"x": 0.35, "y": 0.1}
 
             ScrollView:
-                ColorLabel:
-                    text: "memo of the day"
+                size_hint: 1, 0.2
 
-                    size_hint: 1, 1
-                    text_size: self.size
-                   
-                    color: (0, 1, 1, 1)
-                            
+                ColorLabel:
+                    id: tile
+
+                    text: "the content"        
+                               
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+
 
             ScrollView:
-                ColorLabel:
-                    text: "memo of the month"   
-                    size_hint: 1, 1
+                size_hint: 1, 0.8
 
-                    text_size: self.size
-                   
-                    color: (0, 1, 1, 1)
-                    background_color: (1, 0, 1, 1)
-                
+                ColorLabel:
+                    id: content
+
+                    text: "fhjgfkjgkjg"  
+
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+
 
         Button:
             text: "ADD"
@@ -297,16 +307,18 @@ WindowManager:
                 on_release: 
                     root.dismiss()
 
-     
-
 
 <ColorLabel>:
+
     canvas.before:
+
         Color:
             rgb: 0.30, 0.30, 0.30
 
         Rectangle:
             pos: self.pos
             size: self.size
+
+            
 
             

@@ -1,6 +1,8 @@
 import json
 import os 
 
+import random
+
 jsonFileName = "memos.json"
 pathToJson = os.path.join(os.path.dirname(__file__), jsonFileName)
 
@@ -24,7 +26,7 @@ def delete(title):
         data = json.load(file)
 
         del data[title]
-        
+
         file.truncate(0)
         file.seek(0)
 
@@ -35,6 +37,14 @@ def retreive(title):
         data = json.load(file)
 
         return data[title]
+
+def retreiveRandomMemo():
+    with open(pathToJson, "r+") as file:
+        data = json.load(file)
+
+        file.close()
+  
+    return random.choice(list(data.items())) 
 
 def retreiveAllItems():
     with open(pathToJson, "r+") as file:
