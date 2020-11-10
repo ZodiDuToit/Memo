@@ -28,8 +28,8 @@ class MainWindow(Screen):
     content = ObjectProperty(None)
 
     def on_enter(self):
-        Clock.schedule_once(self.displayRandomMemo)
-        
+        Clock.schedule_once(self.addTitleButtons)
+        #self.displayRandomMemo()
     
     def changeCurrentScreen(self, screen, direction):
         self.manager.current = screen
@@ -51,9 +51,9 @@ class MainWindow(Screen):
 
             self.addbutton(title, self.onTitleButtonRelease)  
         
-    def displayRandomMemo(self, instance):
+    def displayRandomMemo(self):
         self.title, self.content = database.retreiveRandomMemo()
-
+        
 
 class AddWindow(Screen): 
 
