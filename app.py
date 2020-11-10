@@ -101,6 +101,9 @@ class DisplayWindow(Screen):
         self.content.text = str(database.retreive(currectMemosTitle))
         self.title.text = str(currectMemosTitle)
 
+    def deleteMemo(self):
+        database.delete(self.title.text)
+
   
 # buttons
 class ScrollViewButton(Button):

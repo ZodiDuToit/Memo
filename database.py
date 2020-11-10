@@ -22,7 +22,10 @@ def delete(title):
     with open(pathToJson, "r+") as file:
 
         data = json.load(file)
-        data.discard(title)
+
+        del data[title]
+        
+        file.truncate(0)
         file.seek(0)
 
         json.dump(data, file)

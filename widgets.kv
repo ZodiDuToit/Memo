@@ -71,11 +71,11 @@ WindowManager:
 
             cols: 2
 
-            size_hint: 1, 0.75
+            size_hint: 1, 0.8
             pos_hint: {"top": 1}
 
-            spacing: 10
-            padding: 10
+            spacing: 5
+            padding: 5
 
             ColorLabel:
                 text: "Title"
@@ -98,26 +98,39 @@ WindowManager:
                 text: ""
                 background_color: 1, 1, 0, 0, 1
 
-        Button:
-            text: "edit" 
+        GridLayout:
+            cols: 3
 
-            size_hint: 0.2, 0.1
-            pos_hint: {"x": 0, "bottom": 1}
+            size_hint: 1, 0.2
 
-            on_release:
-                app.root.current = "edit"
-                root.manager.transition.direction = "right"
+            Button:
+                text: "edit" 
 
-        Button:
-            text: "Back"
+                size_hint: 0.33, 0.1
 
-            size_hint: 0.8, 0.1
-            pos_hint: {"x": 0.2, "bottom": 1}     
+                on_release:
+                    app.root.current = "edit"
+                    root.manager.transition.direction = "right"
 
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "up"
-                 
+            Button:
+                text: "Delete"
+
+                size_hint: 0.33, 0.1  
+
+                on_release:
+                    root.deleteMemo()
+
+                    app.root.current = "main"
+                    root.manager.transition.direction = "up"       
+
+            Button:
+                text: "Back"
+
+                size_hint: 0.33, 0.1
+
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "up"
 
 
 <EditingWindow>:
