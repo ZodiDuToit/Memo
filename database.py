@@ -3,6 +3,8 @@ import os
 
 import random
 
+seed = random.randint(1, 100)
+
 jsonFileName = "memos.json"
 pathToJson = os.path.join(os.path.dirname(__file__), jsonFileName)
 
@@ -38,13 +40,25 @@ def retreive(title):
 
         return data[title]
 
-def retreiveRandomMemo():
+
+def retreiveRandomTitle():
+    with open(pathToJson, "r+") as file:
+        data = json.load(file)
+
+        file.close()
+
+    random.seed(seed)
+    return random.choice(list(data.keys()))
+
+def retreiveRandomContent():
     with open(pathToJson, "r+") as file:
         data = json.load(file)
 
         file.close()
   
-    return random.choice(list(data.items())) 
+    random.seed(seed)
+    return random.choice(list(data.values()))
+
 
 def retreiveAllItems():
     with open(pathToJson, "r+") as file:

@@ -11,9 +11,6 @@ WindowManager:
 
     container: container
 
-    tile: tile
-    content: content
-
     FloatLayout:
         ScrollView:
             size_hint: 0.3, 1
@@ -39,9 +36,8 @@ WindowManager:
                 size_hint: 1, 0.2
 
                 ColorLabel:
-                    id: tile
 
-                    text: "the content"        
+                    text:  root.getRandomTitle()     
                                
                     size_hint_y: None
                     height: self.texture_size[1]
@@ -52,9 +48,7 @@ WindowManager:
                 size_hint: 1, 0.8
 
                 ColorLabel:
-                    id: content
-
-                    text: "fhjgfkjgkjg"  
+                    text: root.getRandomContent()  
 
                     size_hint_y: None
                     height: self.texture_size[1]
@@ -79,7 +73,7 @@ WindowManager:
     FloatLayout:
         GridLayout:
 
-            cols: 2
+            cols: 1
 
             size_hint: 1, 0.8
             pos_hint: {"top": 1}
@@ -89,29 +83,25 @@ WindowManager:
 
             ColorLabel:
                 text: "Title"
-                size_hint: 0.1, 0.5
                 
+
             ColorLabel:
                 id: title
 
                 text: ""
-                background_color: 0.1, 0.2, 0.7, 1
-            
 
             ColorLabel:
                 text: "Memo"
-                size_hint: 0.1, 0.5
 
             ColorLabel:
                 id: content
 
-                text: ""
-                background_color: 1, 1, 0, 0, 1
+                text: ""               
 
         GridLayout:
             cols: 3
 
-            size_hint: 1, 0.2
+            size_hint: 1, 0.1
 
             Button:
                 text: "edit" 
@@ -309,6 +299,12 @@ WindowManager:
 
 
 <ColorLabel>:
+
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+
+    halign: "center"
 
     canvas.before:
 

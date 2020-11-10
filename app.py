@@ -23,13 +23,10 @@ class WindowManager(ScreenManager):
 class MainWindow(Screen):
 
     container = ObjectProperty(None)
-
-    title = ObjectProperty(None)
-    content = ObjectProperty(None)
+    
 
     def on_enter(self):
         Clock.schedule_once(self.addTitleButtons)
-        #self.displayRandomMemo()
     
     def changeCurrentScreen(self, screen, direction):
         self.manager.current = screen
@@ -48,12 +45,13 @@ class MainWindow(Screen):
         self.container.clear_widgets()
         
         for title in database.retreiveAllTitles():
-
             self.addbutton(title, self.onTitleButtonRelease)  
-        
-    def displayRandomMemo(self):
-        self.title, self.content = database.retreiveRandomMemo()
-        
+
+    def getRandomTitle(self):
+        return database.retreiveRandomTitle()
+
+    def getRandomContent(self):
+        return database.retreiveRandomContent()
 
 class AddWindow(Screen): 
 
@@ -99,8 +97,8 @@ class DisplayWindow(Screen):
         Clock.schedule_once(self.addTitleAndContent)
 
     def addTitleAndContent(self, instance):
-        self.content.text = str(database.retreive(currectMemosTitle))
-        self.title.text = str(currectMemosTitle)
+        self.content.text = database.retreive(currectMemosTitle)
+        self.title.text = currectMemosTitle
 
     def deleteMemo(self):
         database.delete(self.title.text)
