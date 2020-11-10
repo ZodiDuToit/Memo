@@ -12,8 +12,10 @@ WindowManager:
     container: container
 
     FloatLayout:
+
+    
         ScrollView:
-            size_hint: 0.3, 1
+            size_hint: 0.3, 1         
 
             GridLayout:
                 id: container
@@ -27,33 +29,34 @@ WindowManager:
         GridLayout:
             cols: 1
 
-            spacing: 0.1
+            spacing: 2.5
 
             size_hint: 0.6, 0.75
-            pos_hint: {"x": 0.35, "y": 0.1}
+            pos_hint: {"x": 0.35, "y": 0.2}
 
-            ScrollView:
-                size_hint: 1, 0.2
+            ColorLabel:
+                text: "Title"
+                
+                size_hint: 0.2, 0.1
 
-                ColorLabel:
+            ColorLabel:
+                text: root.getRandomTitle()
 
-                    text:  root.getRandomTitle()     
-                               
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    text_size: self.width, None
+                multiline: False
 
+                size_hint: 0.8, 0.1
+                pos_hint: {"x": 0.1, "y": 0.9}            
 
-            ScrollView:
-                size_hint: 1, 0.8
+            ColorLabel:
+                text: "Memo"
+                size_hint: 0.2, 0.1
 
-                ColorLabel:
-                    text: root.getRandomContent()  
+            ColorLabel:
+                text: root.getRandomContent()
 
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    text_size: self.width, None
-
+                size_hint: (0.8, 0.8)
+                pos_hint: {"x": 0.1, "y": 0.1}
+ 
 
         Button:
             text: "ADD"
@@ -79,25 +82,32 @@ WindowManager:
             pos_hint: {"top": 1}
 
             spacing: 5
-            padding: 5
+            padding: 40
 
             ColorLabel:
                 text: "Title"
                 
+                size_hint: 0.2, 0.1
 
             ColorLabel:
                 id: title
 
-                text: ""
+                multiline: False
+
+                size_hint: 0.8, 0.1
+                pos_hint: {"x": 0.1, "y": 0.9}            
 
             ColorLabel:
-                text: "Memo"
+                text: "Content"
+                size_hint: 0.2, 0.1
 
             ColorLabel:
                 id: content
 
-                text: ""               
-
+                size_hint: (0.8, 0.8)
+                pos_hint: {"x": 0.1, "y": 0.1}
+  
+        
         GridLayout:
             cols: 3
 
@@ -157,7 +167,7 @@ WindowManager:
                 size_hint: 0.8, 0.1          
 
             ColorLabel:
-                text: "Memo"
+                text: "Content"
                 size_hint: 0.2, 0.1
 
             TextInput:
@@ -269,7 +279,7 @@ WindowManager:
         orientation: "lr-tb"
 
         ColorLabel: 
-            text: "Changes has been made"
+            text: "If you made changes click [Save changes]"
 
         GridLayout:
             cols: 1
