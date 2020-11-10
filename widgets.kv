@@ -82,11 +82,25 @@ WindowManager:
 
         Button:
             text: "edit" 
+
             size_hint: 0.2, 0.1
+            pos_hint: {"x": 0, "bottom": 1}
 
             on_release:
                 app.root.current = "edit"
                 root.manager.transition.direction = "right"
+
+        Button:
+            text: "Back"
+
+            size_hint: 0.8, 0.1
+            pos_hint: {"x": 0.2, "bottom": 1}     
+
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+                 
+
 
 <EditingWindow>:
     name: "edit"
@@ -202,7 +216,7 @@ WindowManager:
 
                 on_release:
                     app.root.current = "main"
-                    root.manager.transition.direction = "down"                    
+                    root.manager.transition.direction = "right"                    
 
                     content.text = ""
                     title.text = ""
