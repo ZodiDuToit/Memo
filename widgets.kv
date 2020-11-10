@@ -30,9 +30,17 @@ WindowManager:
 
         Label:
             text: "memo of the month"   
-            size_hint: 0.3, 7.5
+            size_hint: 0.3, 0.75
             pos_hint: {"x": 0.6, "y": 0.8}
 
+        Button:
+            text: "ADD"
+            size_hint: 0.2, 0.1
+            pos_hint: {"right": 0.8, "bottom": 0.8}     
+
+            on_release:
+                app.root.current = "add"
+                root.manager.transition.direction = "left"
 
 <DisplayWindow>:
     name: "display"
@@ -126,7 +134,7 @@ WindowManager:
                     self.show_popup()
                 
 <AddWindow>:
-    name: "edit"
+    name: "add"
 
     title: title
     content: content
@@ -171,6 +179,7 @@ WindowManager:
                 pos_hint: {"x": 0, "y": 0}
 
                 on_release:
+                    root.makeTitleContentGlobal()
                     self.show_popup()
 
             Button:
@@ -192,14 +201,14 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        orientation: "vertical"
+        orientation: "lr-tb"
 
         Label: 
             text: "Changes has been made"
 
         GridLayout:
             cols: 1
-            orientation: "horisontal"
+            orientation: "tb-lr"
 
             Button:
                 text: "Save Changes"

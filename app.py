@@ -28,8 +28,11 @@ class MainWindow(Screen):
     
 
     def changeCurrentScreen(self, screen, direction):
-        MyMainApp.root.current = screen
+        self.manager.current = screen
         self.manager.transition.direction = direction
+
+    def onMemoButtonRelease(self, instance):
+        self.changeCurrentScreen("add", "up")   
 
 
     def onTitleButtonRelease(self, instance):
@@ -43,13 +46,8 @@ class MainWindow(Screen):
         self.container.add_widget(Button(text=text, on_release=on_release))
 
 
-    def addAddButton(self):
-       self.addbutton("Add", self.changeCurrentScreen("add", "up")) 
-
-
     def addTitleButtons(self, instance):
         self.container.clear_widgets()
-        self.addAddButton()
         
         for title in database.retreiveAllTitles():
 
@@ -61,6 +59,12 @@ class AddWindow(Screen):
     title = ObjectProperty(None)
     content = ObjectProperty(None)
 
+    def makeTitleContentGlobal(self):
+        global editingTitle, editingContent
+
+        editingTitle, editingContent = self.title, self.content
+
+
 
 class EditingWindow(Screen):
     
@@ -71,6 +75,7 @@ class EditingWindow(Screen):
         Clock.schedule_once(self.addTitleAndContent)
 
     def addTitleAndContent(self, instance):
+        global editingTitle, editingContent
 
         editingTitle, editingContent = self.title, self.content
  
