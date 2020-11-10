@@ -56,6 +56,7 @@ class MainWindow(Screen):
 
 class AddWindow(Screen): 
 
+    help = ObjectProperty(None)
     title = ObjectProperty(None)
     content = ObjectProperty(None)
 
@@ -64,6 +65,11 @@ class AddWindow(Screen):
 
         editingTitle, editingContent = self.title, self.content
 
+    def isFalidTitle(self):
+        return len(self.title.text) >= 1
+
+    def addHelpMessage(self, message):
+        self.help.text = message
 
 
 class EditingWindow(Screen):

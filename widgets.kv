@@ -109,8 +109,7 @@ WindowManager:
 
                 text: ""
 
-                size_hint: 0.8, 0.1
-                pos_hint: {"x": 0.1, "y": 0.9}            
+                size_hint: 0.8, 0.1          
 
             Label:
                 text: "Memo"
@@ -122,34 +121,45 @@ WindowManager:
                 text: ""
 
                 size_hint: (0.8, 0.8)
-                pos_hint: {"x": 0.1, "y": 0.1}
 
             OpenSaveMemoPopupButton:
                 text: "Done"
 
                 size_hint: (0.2, 0.1)
-                pos_hint: {"x": 0, "y": 0}
 
                 on_release:
                     self.show_popup()
+
+            Button:
+                text: "Cancle"
+
+                size_hint: (0.2, 0.1)
+
+                on_release:
+                    app.root.current = "display"
+                    root.manager.transition.direction = "down"
+
                 
 <AddWindow>:
     name: "add"
 
+    help: help
     title: title
     content: content
 
     FloatLayout:
         GridLayout:
 
+            size_hint: 1, 0.9
             cols: 2
+
 
             Label:
                 text: "Title"
                 
                 size_hint: 0.2, 0.1
 
-            Label:
+            TextInput:
                 id: title
 
                 text: ""
@@ -179,8 +189,10 @@ WindowManager:
                 pos_hint: {"x": 0, "y": 0}
 
                 on_release:
-                    root.makeTitleContentGlobal()
-                    self.show_popup()
+                    self.show_popup() if root.isFalidTitle() else root.addHelpMessage("Tile to short")
+
+                    root.makeTitleContentGlobal() 
+
 
             Button:
                 text: "Cancle"  
@@ -190,10 +202,18 @@ WindowManager:
 
                 on_release:
                     app.root.current = "main"
-                    root.manager.transition.direction = "up"                    
+                    root.manager.transition.direction = "down"                    
 
                     content.text = ""
                     title.text = ""
+        Label:
+            id: help
+
+            text: "the help message"
+
+            size_hint: 1, 0.1
+            pos_hint: {"top": 1}
+
 
 <saveMemoPopup>:
 
