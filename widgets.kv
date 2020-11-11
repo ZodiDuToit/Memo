@@ -13,9 +13,19 @@ WindowManager:
 
     FloatLayout:
 
+        BackgroundLabel:
+            pos_hint: {"x": 0.025, "top": 0.975}
+            size_hint: 0.25, 0.075
+
+        ColorLabel:
+            text: "Memos"
+
+            pos_hint: {"x": 0.3, "y": 0.15}
+            size_hint: 0.25, 0.075
     
+
         ScrollView:
-            size_hint: 0.3, 1         
+            size_hint: 0.3, 0.875       
 
             GridLayout:
                 id: container
@@ -25,6 +35,12 @@ WindowManager:
                 height: self.minimum_height  
                 row_default_height: 60
                 cols:1
+
+                padding: 10
+
+        BackgroundLabel:
+            size_hint: 0.7, 0.85
+            pos_hint: {"x": 0.3, "y": 0.15}
 
         GridLayout:
             cols: 1
@@ -74,6 +90,11 @@ WindowManager:
     content: content
 
     FloatLayout:
+
+        BackgroundLabel:
+            size_hint: 0.95, 0.75
+            pos_hint: {"top": 0.975, "x": 0.025}
+
         GridLayout:
 
             cols: 1
@@ -82,7 +103,7 @@ WindowManager:
             pos_hint: {"top": 1}
 
             spacing: 5
-            padding: 40
+            padding: root.width * 0.05
 
             ColorLabel:
                 text: "Title"
@@ -244,7 +265,7 @@ WindowManager:
                 pos_hint: {"x": 0, "y": 0}
 
                 on_release:
-                    self.show_popup() if root.isFalidTitle() else root.addHelpMessage("Tile to short")
+                    self.show_popup() if root.isFalidTitle() else root.addHelpMessage("Please add a Title")
 
                     root.makeTitleContentGlobal() 
 
@@ -264,7 +285,7 @@ WindowManager:
         ColorLabel:
             id: help
 
-            text: "the help message"
+            text: ""
 
             size_hint: 1, 0.1
             pos_hint: {"top": 1}
@@ -272,21 +293,19 @@ WindowManager:
 
 <saveMemoPopup>:
 
+    title: ""
     size_hint: 0.5, 0.4
 
     GridLayout:
         cols: 1
         orientation: "lr-tb"
 
-        ColorLabel: 
-            text: "If you made changes click [Save changes]"
-
         GridLayout:
             cols: 1
             orientation: "tb-lr"
 
             Button:
-                text: "Save Changes"
+                text: "Save"
 
                 on_release: 
                     root.saveChanges()
@@ -317,7 +336,6 @@ WindowManager:
     halign: "center"
 
     canvas.before:
-
         Color:
             rgb: 0.30, 0.30, 0.30
 
@@ -325,6 +343,20 @@ WindowManager:
             pos: self.pos
             size: self.size
 
-            
+<BackgroundLabel>:
+    canvas.before:
+        Color:
+            rgb: 0.70, 0.30, 0.1
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+<Button>:
+    halign: "center"
+
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
 
             

@@ -28,6 +28,7 @@ class MainWindow(Screen):
     def on_enter(self):
         Clock.schedule_once(self.addTitleButtons)
     
+    
     def changeCurrentScreen(self, screen, direction):
         self.manager.current = screen
         self.manager.transition.direction = direction
@@ -38,7 +39,7 @@ class MainWindow(Screen):
         currectMemosTitle = instance.text
         self.changeCurrentScreen("display", "right")
 
-    def addbutton(self, text, on_release):
+    def addbutton(self, text, on_release=None):
         self.container.add_widget(Button(text=text, on_release=on_release))
 
     def addTitleButtons(self, instance):
@@ -126,6 +127,9 @@ class SaveMemoPopup(Popup):
 
 
 class ColorLabel(Label):
+    pass
+
+class BackgroundLabel(Label):
     pass
 
 
